@@ -42,8 +42,8 @@ export default function Footer() {
 
                     <div className={footerStyles.menu}>
                         <p className={utilStyles.pbold}>聯絡我們</p>
-                        <p>工作日 10:00-18:00</p>
-                        <p>accentcoach.co@gmail.com</p>
+                        <p>客服時間 : 週一至週五 10:00-18:00</p>
+                        <p>客服信箱 : accentcoach.co@gmail.com</p>
                     </div>
                     <div className={footerStyles.menu}>
                         <p className={utilStyles.pbold}>Policy</p>
