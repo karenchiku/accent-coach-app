@@ -87,19 +87,21 @@ export default function querybooking() {
            <br/>
             <div className={utilStyles.textSm}>
               <div className={utilStyles.pbold}>注意事項</div>
-              <p>*請務必填寫與預約時相同的<span className={utilStyles.pbold}>電話與email</span></p>
+              <p>*查詢時請填寫與預約時相同的電話與email</p>
             </div>
             </div>
         </div>
       </section>
+      <br/>
       {isOrders ? (
         <section>
           <div>
             <div className={formStyles.formtitle}>
-              <h1>您的預約明細</h1></div>
+              <p className={utilStyles.textLg} >您的預約明細</p>
+              </div>
+            <br/>
             <div className={utilStyles.flexcc}>
-
-              <table>
+              <table className={utilStyles.textSm}>
                 <thead>
                   <tr>
                     <th>訂單編號</th>

@@ -24,6 +24,7 @@ export default async function handler(req, res) {
     const audioFile = req.file;
     const username = req.body.username;
     const email = req.body.email;
+    console.log(g_admin, g_pass, username, email)
 
      // Create a transporter object using the default SMTP transport
      const transporter = nodemailer.createTransport({
@@ -53,10 +54,7 @@ export default async function handler(req, res) {
     res.status(200).json({ message: 'success' });
 
   })
-
-
    
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error sending email' });

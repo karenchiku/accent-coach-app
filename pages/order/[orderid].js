@@ -40,7 +40,7 @@ export default function paymentsucess() {
         // setIsLoading(true);
     }, [orderid])
     const handleSearch = () => {
-        router.push('/searchbooking');
+        router.push('/search');
     };
     const handleClick = () => {
         router.push('/');
