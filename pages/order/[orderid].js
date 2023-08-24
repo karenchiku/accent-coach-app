@@ -94,7 +94,7 @@ export default function paymentsucess() {
 
                             <br />
                             <div className={utilStyles.flexcc}>
-                                <button className={formStyles.button} onClick={handleSearch}>查詢訂單狀態</button>
+                                <button className={formStyles.button} onClick={handleSearch}>查詢訂單</button>
                                 <button className={formStyles.button} onClick={handleClick}>返回主頁</button>
                             </div>
 

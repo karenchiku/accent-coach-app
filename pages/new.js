@@ -145,6 +145,7 @@ export default function paymentsucess() {
                     <br/>
                     <div className={utilStyles.textSm}>
                         <p>請念出以下句子, 並按下錄音寄出給我們</p>
+                    
                         <p>1. Is the laundry dry yet? I’ve been waiting for hours!</p>
                         <p>2. My brother says he doesn’t have any siblings. Mom, what do you think about that?</p>
                         <p>3. There’s a construction cone blocking the road ahead. Let’s turn left instead.</p>
@@ -159,6 +160,7 @@ export default function paymentsucess() {
                     {audioURL && (
                         <div className={formStyles.audioresult}>
                             <audio controls src={audioURL} type="audio/mp3" />
+                            
                             <div className={formStyles.inputcontent}>
                                 <div className={formStyles.inputcontanier}>
                                     {/* <div className={formStyles.inputlabel}>Name</div> */}
@@ -176,7 +178,7 @@ export default function paymentsucess() {
                                 </div>
 
                                 <div className={utilStyles.flexccc}>
-                                    {!isHasRecording && !isSentRecording && <button className={formStyles.button} onClick={handleSubmitRecording}>傳送錄音</button>}
+                                    {!isHasRecording && !isSentRecording && <button className={formStyles.button} onClick={handleSubmitRecording}>錄音</button>}
                                     {isSubmitting && <p>傳送中...</p>}
                                     {isHasRecording && <p>未傳送, something goes wrong!</p>}
                                     {isSentRecording && <p>已傳送錄音給老師</p>}
@@ -184,8 +186,9 @@ export default function paymentsucess() {
                             </div>
                             <br/>
                             <div className={utilStyles.textSm}>
-                                <p>*請務必填寫與預約時相同的Email</p>
-                    
+          
+                                <p>*相同Email僅限一次課前評估, 請您送出前確認錄音內容是否完整 </p>
+                                <p>*若己經預約同學請填寫與預約時相同的Email</p>
 
                             </div>
                         </div>

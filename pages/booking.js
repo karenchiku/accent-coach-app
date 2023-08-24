@@ -129,7 +129,7 @@ export default function Order() {
               </div>
             
             </div>
-            <div className={formStyles.inputcontanier}>   
+            <div className={`${formStyles.checkboxcontainer}`}>   
               <input type='checkbox' value={allowtosend} onChange={(e)=>setAllowToSend(e.target.value)}></input> 
               <p className={utilStyles.textSm}> Yes, AccentCoach can email me with promotions and news. (optional)</p>
          </div>
@@ -161,9 +161,9 @@ export default function Order() {
             </div>
          <br/>
           <div className={utilStyles.textSm}>
-            <p>*請務必留意填寫電話與Email透過<span className={formStyles.inlinelink}><Link href="/search">查詢</Link></span>目前預約狀態</p>
-            <p>*預約上課時間前48小時前取消可提供全額退款</p>
-            
+            <p>*預約上課時間前48小時前取消, 提供全額退款</p>
+            <p>*預約狀態, 可以透過<span className={formStyles.inlinelink}><Link href="/search">查詢</Link></span>目前預約狀態</p>
+            <p>*上課前, 請先到<span className={formStyles.inlinelink}><Link href="/new">測試</Link></span>錄下您的口說錄音</p>
           </div>
           </div>
         </div>

@@ -83,6 +83,18 @@
   box-shadow: 1px 1px 2px rgba(0, 0, 82, 0.15);
 
 }
+.checkboxcontainer 
+{
+  margin-right: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+
+}
+
+.checkboxcontainer input{
+  margin-right: 10px;
+}
 
 .inputcontanier{
   width: 100%;
