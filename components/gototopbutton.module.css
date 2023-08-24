@@ -1,0 +1,10 @@
+.up{
+    position: fixed;
+    bottom: 60px;
+    right: 40px;
+    width: 50px; 
+    transition: opacity 0.3s ease-in-out;
+    cursor: pointer;
+    
+  }
+

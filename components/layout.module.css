@@ -1,0 +1,25 @@
+.container {
+  padding: 0 11rem;
+  margin: 0;
+  /* background-color: blue; */
+}
+
+.children{
+  max-width: 65rem;
+  padding: 1rem 2rem;
+  margin: 0 auto;
+  /* background-color: brown; */
+
+}
+
+
+@media (max-width: 1000px) {
+  .children{
+    padding: 1rem 1.5rem;
+  }
+  .container{
+    padding: 0;
+  }
+}
+
+

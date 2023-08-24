@@ -1,0 +1,141 @@
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 15px;
+    height: 80px;
+}
+
+
+.hamburgertoggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 2px;
+    background-color: #141222;
+    transition: all 0.3s;
+}
+
+.hamburger .bar::before,
+.hamburger .bar::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #141222;
+    transition: all 0.3s;
+}
+
+.hamburger .bar::before {
+    transform: translateY(-10px);
+}
+
+.hamburger .bar::after {
+    transform: translateY(10px);
+}
+
+.logoicon {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+    font-size: 1.8rem;
+  line-height: 1.3;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.logoimg {
+    width: 12%;
+    margin-top: 0.3rem;
+  }
+
+
+.menubar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.menubar a {
+    padding-bottom: 5px;
+
+    background-image: linear-gradient(transparent 0%,
+            transparent 90%,
+            #DBADB0 80%,
+            #DBADB0 90%);
+
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position-x: right;
+    text-decoration: none;
+    transition: background-size 300ms;
+}
+
+.menubar a:link,
+.menubar a:visited {
+    color: #28303d;
+}
+
+.menubar a:hover,
+.menubar a:active {
+    background-size: 100% 100%;
+    background-position-x: left;
+}
+
+@media (max-width: 1400px) {
+    .nav {
+        margin: 0 15px;
+    }
+
+    .hamburger {
+        display: flex;
+        z-index: 999;
+    }
+
+    .hamburgertoggle:checked~.menubar {
+        transform: none;
+    }
+
+    .hamburgertoggle:checked~.hamburger .bar::before {
+        transform: rotate(45deg);
+    }
+
+    .hamburgertoggle:checked~.hamburger .bar {
+        background-color: transparent;
+    }
+
+    .hamburgertoggle:checked~.hamburger .bar::after {
+        transform: rotate(-45deg);
+    }
+
+    .menubar {
+        flex-direction: column;
+        gap: 25px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        transform: translateY(-100%);
+        transition: transform 0.3s;
+    }
+}
