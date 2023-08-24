@@ -30,7 +30,6 @@ export default async function ecpayinfo(req, res) {
 
     const checkMacValue = computeCheckMacValue(data);
     data.CheckMacValue = checkMacValue;
-    // console.log(data)
     res.status(200).send(data);
   } catch (err) {
     console.error(err);

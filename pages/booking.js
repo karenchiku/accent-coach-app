@@ -131,7 +131,7 @@ export default function Order() {
             </div>
             <div className={`${formStyles.checkboxcontainer}`}>   
               <input type='checkbox' value={allowtosend} onChange={(e)=>setAllowToSend(e.target.value)}></input> 
-              <p className={utilStyles.textSm}> Yes, AccentCoach can email me with promotions and news. (optional)</p>
+              <p className={utilStyles.textSm}> Yes, AccentCoach can email me with promotions and news.</p>
          </div>
  
             <div className={formStyles.inputcontanier}>

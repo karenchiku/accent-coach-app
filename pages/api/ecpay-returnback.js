@@ -21,13 +21,13 @@ export default async function ecpaycallback(req, res) {
   const calculateCheckMacValue = computeCheckMacValue(data);
   try {
 
-    if (1 == 1) {  // chage to chcekmacvalue
+    if (CheckMacValue == calculateCheckMacValue) {  // chage to chcekmacvalue
       await handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue, calculateCheckMacValue)
       console.log('Insert return result ', MerchantTradeNo)
       await handleRtncode(RtnCode, MerchantTradeNo, PaymentDate)
       console.log('Update booking ', MerchantTradeNo)
-      await handleTimeSheet(MerchantTradeNo)
-      console.log('Update timesheet', MerchantTradeNo)
+      // await handleTimeSheet(MerchantTradeNo)
+      // console.log('Update timesheet', MerchantTradeNo)
       res.status(200).send('1|OK')
 
     } else {
