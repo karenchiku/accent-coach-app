@@ -14,7 +14,12 @@ export default async function handler(req, res) {
     await pool.connect();
 
     const { teacherid } = req.body;
-    const query = `SELECT opendatetime FROM accentcoach_timesheet  where teacherid = ${teacherid} and status = 1`;
+    const query = `SELECT opendatetime, DATEPART(WEEKDAY,opendatetime) as weekday FROM 
+      accentcoach_timesheet 
+      where teacherid = ${teacherid} 
+      and status = 1 
+      and opendatetime > DATEADD(dd,1,CAST(GETDATE() AS DATE))
+      and opendatetime < DATEADD(dd,8,CAST(GETDATE() AS DATE)) order by 1`;
     const result = await pool.request().query(query);
 
     res.status(200).json(result.recordset);

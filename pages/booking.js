@@ -60,6 +60,18 @@ export default function Order() {
       alert('請輸入名子, Email和電話')
     }
   };
+  const handleWeekday = (weekday) => {
+    switch(weekday) {
+        case 1: return '日';  // Sunday
+        case 2: return '一';  // Monday
+        case 3: return '二';  // Tuesday
+        case 4: return '三';  // Wednesday
+        case 5: return '四';  // Thursday
+        case 6: return '五';  // Friday
+        case 7: return '六';  // Saturday
+        default: return 'Invalid weekday';  // In case an invalid number is provided
+    }
+}
 
   const Submit = async () => {
     // e.preventDefault();
@@ -151,7 +163,7 @@ export default function Order() {
                 <select className={formStyles.select} id="bookingdate" name="bookingdate" value={bookingdate} onChange={(e) => setBookingdate(e.target.value)}>
                   <option value="1900-01-01">預約日期時段</option>
                   {options.map((option, _index) => (
-                    <option key={_index} value={option.opendatetime.replace('T', ' ').replace(':000Z', '')}>{option.opendatetime.replace(':00.000Z', '').replace('T', ' ')}</option>))}
+                    <option key={_index} value={option.opendatetime}>{option.opendatetime.replace(':00.000Z', '').replace('T', ' ')}{`(${handleWeekday(option.weekday)})`}</option>))}
                 </select>
               </div>
             </div>

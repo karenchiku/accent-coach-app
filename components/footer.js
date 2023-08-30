@@ -33,7 +33,6 @@ export default function Footer() {
         setIsSubmitting(false)
     };
 
-
     return (
         <div className={footerStyles.bgcontainer}>
             <div className={footerStyles.container}>
@@ -75,9 +74,7 @@ export default function Footer() {
                 <div className={footerStyles.undertext}>
                     <p>支付功能由第三方提供</p>
                     <p>2023 Copyright © All Rights Reserverd.</p>
-                </div>
-             
-         
+                </div>             
             </div>
             {/* <div className={utilStyles.space}></div> */}
         </div>
