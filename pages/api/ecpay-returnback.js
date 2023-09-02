@@ -26,7 +26,9 @@ export default async function ecpaycallback(req, res) {
       console.log('Insert return result ', MerchantTradeNo)
       await handleRtncode(RtnCode, MerchantTradeNo, PaymentDate)
       console.log('Update booking ', MerchantTradeNo)
- 
+      await handleBookSendEmail(MerchantTradeNo)
+      console.log('Send email ', MerchantTradeNo)
+   
       res.status(200).send('1|OK')
 
     } else {
@@ -49,22 +51,6 @@ async function handleRtncode(RtnCode, MerchantTradeNo, PaymentDate) {
     request.input('PaymentDate', sql.DateTime, PaymentDate);
     const result = await request.query(`
         exec dbo.sp_UpdateAccentCoachBooking @OrderID,  @PaymentDate, @RtnCode
-    `);
-  } catch (err) {
-    console.log(err);
-  } finally {
-    await pool.close();
-  }
-}
-
-//updata the rtncode to the database
-async function handleTimeSheet(RtnCode, MerchantTradeNo, PaymentDate) {
-  try {
-    await pool.connect();
-    const request = new sql.Request(pool);
-    request.input('OrderID', sql.VarChar, MerchantTradeNo);
-    const result = await request.query(`
-        exec dbo.sp_UpdateAccentCoachTimeSheetStatus @OrderID
     `);
   } catch (err) {
     console.log(err);
@@ -101,7 +87,23 @@ async function handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, Paymen
   }
 }
 
-
+async function handleBookSendEmail(MerchantTradeNo){
+  try{
+    const response = await fetch('/api/send-email', {
+      method: 'POST',
+      body: JSON.stringify({ orderid : MerchantTradeNo, title:'Accent Coach Payment Success Email'}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await response.json();
+    
+  }catch(err){
+    console.log(err);
+  }
+  
+ 
+}
 // before delete [Object: null prototype] {
 //   CustomField1: '',
 //   CustomField2: '',

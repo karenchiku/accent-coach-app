@@ -7,7 +7,7 @@ import formStyles from '../../styles/form.module.css'
 
 export default function Payment() {
   const router = useRouter();
-  const { orderid } = router.query;
+  const {orderid } = router.query;
   const [booking, setBooking] = useState([]);
   const [isloading, setIsLoading] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -34,8 +34,8 @@ export default function Payment() {
           }
 
         })
-        .catch(error => {
-          console.log(error);
+        .catch(err => {
+          console.log(err);
         });
     }
 
@@ -75,8 +75,8 @@ export default function Payment() {
 
         setIsSubmitting(false)
 
-      }).catch(error => {
-        console.log(error);
+      }).catch(err => {
+        console.log(err);
         setIsSubmitting(false)
       });
   };
@@ -134,8 +134,9 @@ export default function Payment() {
               </div>
 
               <div className={utilStyles.flexccc}>
+      
                 <button className={formStyles.button} onClick={handlePayment}>前往付款</button>
-                {isSubmitting ? '付款轉跳中...' : ''}
+                {isSubmitting && '付款轉跳中...'}
               </div>
                <br/>
               <div className={utilStyles.textSm}>
