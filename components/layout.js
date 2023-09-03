@@ -1,13 +1,11 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Script from 'next/script'
 import Hamburger from './hamburger';
 import Footer from './footer';
 import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
-import Link from 'next/link'
-import GoToTopButton from '../components/gototopbutton';
 
+import GoToTopButton from '../components/gototopbutton';
+import { Analytics } from '@vercel/analytics/react';
+ 
 export const siteTitle = 'Accent Coach'
 
 export default function Layout({ children, home }) {
@@ -25,9 +23,8 @@ export default function Layout({ children, home }) {
       {/* <h1 className={utilStyles.heading2Xl}>[!!!測試中TEST!!!不要預約不要付款]</h1> */}
       <div className={styles.children}>{children}</div>
       <Footer />
-      <GoToTopButton />
-      
-    
+      <GoToTopButton />  
+      <Analytics />
     </div>
   )
 }
