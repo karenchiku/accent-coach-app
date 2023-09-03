@@ -33,13 +33,10 @@ export default function Order() {
       })
         .then(res => res.json())
         .then(data => {
-
           setOptions(data)
-          console.log(data)
         })
         .catch(error => {
           console.log(error);
-          // router.push('/error')
         });
     }
 

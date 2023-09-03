@@ -89,9 +89,9 @@ async function handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, Paymen
 
 async function handleBookSendEmail(MerchantTradeNo){
   try{
-    const response = await fetch('/api/send-email', {
+    const response = await fetch('http://www.accentcoach.co/api/send-email', {
       method: 'POST',
-      body: JSON.stringify({ orderid : MerchantTradeNo, title:'Accent Coach Payment Success Email'}),
+      body: JSON.stringify({ orderid : MerchantTradeNo, title: 'Accent Coach Payment Success Email'}),
       headers: {
         'Content-Type': 'application/json'
       }
