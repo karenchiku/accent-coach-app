@@ -309,7 +309,7 @@ export default function Home() {
             {q1option &&
               <div className={formStyles.answer}>
                 {language === 'en' ?
-                  <p>Please make sure to send your <span className={formStyles.inlinelink} ><Link href="/new">sample recording</Link></span> before your session.</p> : <p>請確認有先到 <span className={formStyles.inlinelink} ><Link href="/new">測試</Link></span> 錄下您的口說錄音</p>}
+                  <p>Please make sure to send your <span className={formStyles.inlinelink} ><Link href="/new">sample recording</Link></span> before your session.</p> : <p>請先到 <span className={formStyles.inlinelink} ><Link href="/new">測試</Link></span> 錄下您的口說錄音</p>}
               </div>
             }
           </div>

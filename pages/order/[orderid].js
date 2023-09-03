@@ -98,7 +98,8 @@ export default function paymentsucess() {
                                 <button className={formStyles.button} onClick={handleClick}>返回主頁</button>
                             </div>
 
-                            <p className={utilStyles.textSm}>感謝你的預約, 請務必在課程前到測試區錄音, 老師確認後會另外發Email到您的信箱</p>
+                            <p className={utilStyles.textSm}>感謝你的預約, 請務必在課程前到測驗區錄音</p>
+                            <p className={utilStyles.textSm}>已發送付款成功信件到您的信箱, 老師確認後會另外發出確認地址到您的信箱, 請再確認信箱是否收到郵件</p>
 
 
                         </div>

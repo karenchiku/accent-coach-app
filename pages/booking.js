@@ -170,9 +170,9 @@ export default function Order() {
             </div>
          <br/>
           <div className={utilStyles.textSm}>
-            <p>*預約上課時間前48小時前取消, 提供全額退款</p>
-            <p>*預約狀態, 可以透過<span className={formStyles.inlinelink}><Link href="/search">查詢</Link></span>目前預約狀態</p>
-            <p>*上課前, 請先到<span className={formStyles.inlinelink}><Link href="/new">測試</Link></span>錄下您的口說錄音</p>
+            <p>*提供全額退款, 預約上課時間前48小時前可以免費取消 </p>
+            <p>*預約狀態, 可以透過 <span className={formStyles.inlinelink}><Link href="/search">預約查詢</Link></span> 目前預約狀態</p>
+            <p>*上課前, 請先到 <span className={formStyles.inlinelink}><Link href="/new">測試</Link></span> 錄下您的口說錄音</p>
           </div>
           </div>
         </div>
