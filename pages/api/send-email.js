@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   try {
     await pool.connect();
 
-    const { orderid,title } = req.body;
+    const { orderid } = req.body;
     console.log('send-email:', orderid)
 
     const query = `SELECT * FROM dbo.accentcoach_bookings WHERE orderid ='${orderid}'`;
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     const mailOptions = {
       from: g_admin,
       to: `${booking.email};${g_admin}`,
-      subject: title,
+      subject: 'test message',
       text: `Hi ${booking.username},
         \nThank you for attending the accent coach class.
         \nHere is your booking information, after the teacher confirmed we will send you a confirmation email with location address.

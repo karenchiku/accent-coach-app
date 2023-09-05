@@ -2,7 +2,6 @@
 const sql = require('mssql');
 const crypto = require('crypto');
 import { computeCheckMacValue } from '../../components/utils/checkmachinevalue';
-import { sendEmail } from '../../components/utils/sendemail';
 
 import config from '../../config/config';
 const pool = new sql.ConnectionPool(config);
@@ -28,7 +27,7 @@ export default async function ecpaycallback(req, res) {
       console.log('Insert return result ', MerchantTradeNo)
       await handleRtncode(RtnCode, MerchantTradeNo, PaymentDate)
       console.log('Update booking ', MerchantTradeNo)
-      await sendEmail(MerchantTradeNo, 'Accent Coach Payment Success Email')
+      await handleBookSendEmail(MerchantTradeNo)
       console.log('Send email ', MerchantTradeNo)
    
       res.status(200).send('1|OK')
@@ -89,11 +88,58 @@ async function handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, Paymen
   }
 }
 
+async function handleBookSendEmail(orderid) {
+ 
+  try {
+    await pool.connect();
+
+    console.log('send-email:', orderid)
+    const query = `SELECT * FROM dbo.accentcoach_bookings WHERE orderid ='${orderid}'`;
+    const result = await pool.request().query(query);
+    const booking =result.recordset[0]
+
+     // Create a transporter object using the default SMTP transport
+     const transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: g_admin,
+        pass: g_pass,
+      },
+    });
+
+    const mailOptions = {
+      from: g_admin,
+      to: `${booking.email};${g_admin}`,
+      subject: 'test message',
+      text: `Hi ${booking.username},
+        \nThank you for attending the accent coach class.
+        \nHere is your booking information, after the teacher confirmed we will send you a confirmation email with location address.
+        \n\n1.你的訂單編號:${orderid}
+        \n2.預約日期:${booking.bookingdate}
+        \n3.預約項目:${booking.itemname}
+        \n
+        \n If you have any further questions pleas let us know.
+        \n Best,
+        \n Accent Coach Team
+        `,
+    
+    };
+
+    // Send the email
+    await transporter.sendMail(mailOptions);
+   
+  } catch (error) {
+    console.error(error);
+  } finally {
+    await pool.close();
+  }
+}
+
 // async function handleBookSendEmail(MerchantTradeNo){
 //   try{
 //     const response = await fetch('http://www.accentcoach.co/api/send-email', {
 //       method: 'POST',
-//       body: JSON.stringify({ orderid : MerchantTradeNo, title: 'Accent Coach Payment Success Email'}),
+//       body: JSON.stringify({ orderid : MerchantTradeNo}),
 //       headers: {
 //         'Content-Type': 'application/json'
 //       }

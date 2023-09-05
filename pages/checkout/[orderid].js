@@ -134,8 +134,7 @@ export default function Payment() {
               </div>
 
               <div className={utilStyles.flexccc}>
-      
-                <button className={formStyles.button} onClick={handlePayment}>前往付款</button>
+               <button className={formStyles.button} onClick={handlePayment}>前往付款</button>
                 {isSubmitting && '付款轉跳中...'}
               </div>
                <br/>

@@ -8,7 +8,7 @@ const g_admin = process.env.ADMIN_EMAIL;
 const g_pass = process.env.ADMIN_PASS;
 
 
-export async function sendEmail( orderid,title ) {
+export async function sendEmail(orderid) {
 
   try {
     await pool.connect();
@@ -30,7 +30,7 @@ export async function sendEmail( orderid,title ) {
     const mailOptions = {
       from: g_admin,
       to: `${booking.email};${g_admin}`,
-      subject: title,
+      subject: 'test',
       text: `Hi ${booking.username},
         \nThank you for attending the accent coach class.
         \nHere is your booking information, after the teacher confirmed we will send you a confirmation email with location address.
