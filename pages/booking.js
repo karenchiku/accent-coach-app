@@ -148,9 +148,9 @@ export default function Order() {
               <div className={formStyles.inputbox} >
                 <select className={formStyles.select} id="amount" name="amount" value={itemname} onChange={(e) => { setAmount(e.target.value.split('-')[1]); setItemName(e.target.value) }}>
                   <option value="0">預約項目</option>
-                  <option value="大人-3000-1人">大人(3000)- 1人</option>
-                  <option value="小孩-3000-2人">小孩(3000)- 2人</option>
-                  <option value="小孩-2000-1人">小孩(2000)- 1人</option>
+                  <option value="大人-3000-1人">大人(NTD 3000)- 1人</option>
+                  <option value="小孩-3000-2人">小孩(NTD 3000)- 2人</option>
+                  <option value="小孩-2000-1人">小孩(NTD 2000)- 1人</option>
                 </select>
               </div>
             </div>
@@ -170,7 +170,7 @@ export default function Order() {
             </div>
          <br/>
           <div className={utilStyles.textSm}>
-            <p>*提供全額退款, 預約上課時間前48小時前可以免費取消 </p>
+            <p>*提供全額退款, 預約上課時間前48小時前可以免費取消</p>
             <p>*預約狀態, 可以透過 <span className={formStyles.inlinelink}><Link href="/search">預約查詢</Link></span> 目前預約狀態</p>
             <p>*上課前, 請先到 <span className={formStyles.inlinelink}><Link href="/new">測試</Link></span> 錄下您的口說錄音</p>
           </div>

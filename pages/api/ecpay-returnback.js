@@ -2,6 +2,7 @@
 const sql = require('mssql');
 const crypto = require('crypto');
 import { computeCheckMacValue } from '../../components/utils/checkmachinevalue';
+import { sendEmail } from '../../components/utils/sendemail';
 
 import config from '../../config/config';
 const pool = new sql.ConnectionPool(config);
@@ -19,6 +20,7 @@ export default async function ecpaycallback(req, res) {
   const data = req.body
   delete data.CheckMacValue;
   const calculateCheckMacValue = computeCheckMacValue(data);
+  
   try {
 
     if (CheckMacValue == calculateCheckMacValue) {  // chage to chcekmacvalue
@@ -26,7 +28,7 @@ export default async function ecpaycallback(req, res) {
       console.log('Insert return result ', MerchantTradeNo)
       await handleRtncode(RtnCode, MerchantTradeNo, PaymentDate)
       console.log('Update booking ', MerchantTradeNo)
-      await handleBookSendEmail(MerchantTradeNo)
+      await sendEmail(MerchantTradeNo, 'Accent Coach Payment Success Email')
       console.log('Send email ', MerchantTradeNo)
    
       res.status(200).send('1|OK')
@@ -87,23 +89,23 @@ async function handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, Paymen
   }
 }
 
-async function handleBookSendEmail(MerchantTradeNo){
-  try{
-    const response = await fetch('http://www.accentcoach.co/api/send-email', {
-      method: 'POST',
-      body: JSON.stringify({ orderid : MerchantTradeNo, title: 'Accent Coach Payment Success Email'}),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await response.json();
+// async function handleBookSendEmail(MerchantTradeNo){
+//   try{
+//     const response = await fetch('http://www.accentcoach.co/api/send-email', {
+//       method: 'POST',
+//       body: JSON.stringify({ orderid : MerchantTradeNo, title: 'Accent Coach Payment Success Email'}),
+//       headers: {
+//         'Content-Type': 'application/json'
+//       }
+//     })
+//     const data = await response.json();
     
-  }catch(err){
-    console.log(err);
-  }
+//   }catch(err){
+//     console.log(err);
+//   }
   
  
-}
+// }
 // before delete [Object: null prototype] {
 //   CustomField1: '',
 //   CustomField2: '',
