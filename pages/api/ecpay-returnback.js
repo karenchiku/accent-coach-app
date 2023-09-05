@@ -1,8 +1,8 @@
 
 const sql = require('mssql');
+import nodemailer from 'nodemailer';
 const crypto = require('crypto');
 import { computeCheckMacValue } from '../../components/utils/checkmachinevalue';
-
 import config from '../../config/config';
 const pool = new sql.ConnectionPool(config);
 
