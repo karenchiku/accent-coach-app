@@ -10,6 +10,11 @@ const MERCHANT_ID = process.env.MERCHANT_ID;
 const HASH_KEY = process.env.HASH_KEY;
 const HASH_IV = process.env.HASH_IV;
 
+const g_admin = process.env.ADMIN_EMAIL;
+const g_pass = process.env.ADMIN_PASS;
+
+
+
 export default async function ecpaycallback(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).end(); // Method Not Allowed

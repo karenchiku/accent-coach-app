@@ -73,7 +73,7 @@ export default function Payment() {
         document.body.appendChild(form);
         form.submit();
 
-        setIsSubmitting(false)
+        // setIsSubmitting(false)
 
       }).catch(err => {
         console.log(err);
