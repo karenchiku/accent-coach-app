@@ -1,5 +1,6 @@
 import Layout, { siteTitle } from '../components/layout'
 import Head from 'next/head';
+import utilStyles from '../styles/utils.module.css'
 
 
 export default function Privacy() {
@@ -8,7 +9,7 @@ export default function Privacy() {
             <title>{siteTitle}</title>
             <meta name="robots" content="noindex,nofollow" />
         </Head>
-        <div>
+        <div className = {utilStyles.textMd}>
             <h3>隱私權政策</h3>
 
             <p>日期：西元2019年8月20日</p>
