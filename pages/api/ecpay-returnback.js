@@ -32,12 +32,15 @@ export default async function ecpaycallback(req, res) {
       console.log('Insert return result ', MerchantTradeNo)
       await handleRtncode(RtnCode, MerchantTradeNo, PaymentDate)
       console.log('Update booking ', MerchantTradeNo)
+      
+      if (RtnCode == 1 & RtnMsg == "Succeeded") {
       await handleBookSendEmail(MerchantTradeNo)
       console.log('Send email ', MerchantTradeNo)
-   
+      }
+      // feedback to the ecpay
       res.status(200).send('1|OK')
-
     } else {
+      // feedback to the ecpay
       res.status(400).send('0|FAIL')
     }
 
@@ -56,7 +59,7 @@ async function handleRtncode(RtnCode, MerchantTradeNo, PaymentDate) {
     request.input('RtnCode', sql.VarChar, RtnCode);
     request.input('PaymentDate', sql.DateTime, PaymentDate);
     const result = await request.query(`
-        exec dbo.sp_UpdateAccentCoachBooking @OrderID,  @PaymentDate, @RtnCode
+        exec dbo.sp_UpdateAccentCoachBooking @OrderID, @PaymentDate, @RtnCode
     `);
   } catch (err) {
     console.log(err);
@@ -98,7 +101,6 @@ async function handleBookSendEmail(orderid) {
   try {
     await pool.connect();
 
-    console.log('send-email:', orderid)
     const query = `SELECT * FROM dbo.accentcoach_bookings WHERE orderid ='${orderid}'`;
     const result = await pool.request().query(query);
     const booking =result.recordset[0]

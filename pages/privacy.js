@@ -12,7 +12,7 @@ export default function Privacy() {
         <div className = {utilStyles.textMd}>
             <h3>隱私權政策</h3>
 
-            <p>日期：西元2019年8月20日</p>
+            <p>日期：西元2023年8月20日</p>
             <br />
             <p>版本：第1.1版</p>
             <br />
@@ -101,7 +101,7 @@ export default function Privacy() {
                 <br />
 
                 12. 聯絡我們<br />
-                若您對本政策有任何疑問，請通過電子郵件與我們聯繫。我們的電子郵件是accentcoach@gmail.com。<br />
+                若您對本政策有任何疑問，請通過電子郵件與我們聯繫。我們的電子郵件是accentcoach.co@gmail.com。<br />
             </p>
         </div>
 
