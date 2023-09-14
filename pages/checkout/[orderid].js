@@ -57,7 +57,7 @@ export default function Payment() {
         console.log(data)
         let form = document.createElement('form');
         form.setAttribute('method', 'post');
-        form.setAttribute('action', 'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5');
+        form.setAttribute('action', 'https://payment.ecpay.com.tw/Cashier/AioCheckOut/V5');
         form.setAttribute('enctype', 'application/x-www-form-urlencoded');
         for (const key in data) {
           if (data.hasOwnProperty(key)) {

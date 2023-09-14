@@ -149,9 +149,9 @@ export default function Order() {
               <div className={formStyles.inputbox} >
                 <select className={formStyles.select} id="amount" name="amount" value={itemname} onChange={(e) => { setAmount(e.target.value.split('-')[1]); setItemName(e.target.value) }}>
                   <option value="0">預約項目</option>
-                  <option value="大人-3000-1人">大人(3000/hr NTD) - 1人</option>
-                  <option value="小孩-3000-2人">小孩(3000/hr NTD) - 2人</option>
-                  <option value="小孩-2000-1人">小孩(2000/hr NTD) - 1人</option>
+                  <option value="大人-20-1人">大人(20/hr NTD) - 1人</option>
+                  <option value="小孩-20-2人">小孩(20/hr NTD) - 2人</option>
+                  <option value="小孩-10-1人">小孩(10/hr NTD) - 1人</option>
                 </select>
               </div>
             </div>
