@@ -7,24 +7,21 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).end(); // Method Not Allowed
   }
+
     try {
       await pool.connect();
 
-      const { email } = req.body;
-      const request = new sql.Request(pool);
-      request.input('email', sql.VarChar, email);
+      const {email,phone} = req.body;
+      const query = `SELECT * FROM accentcoach_bookings where email = '${email}' and phone = '${phone}'`;
+      const result = await pool.request().query(query);
  
-      const result = await request.query(`
-        INSERT INTO accentcoach_newsletter (email)
-        VALUES ( @email)
-      `);
-      
-      res.status(200).json({email});
+      res.status(200).json(result.recordset);
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Error creating newsletters' });
+      res.status(500).json({message: 'Error query booking'});
     } finally {
       await pool.close();
     }
+
 
 }

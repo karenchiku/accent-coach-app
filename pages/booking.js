@@ -58,15 +58,16 @@ export default function Order() {
     }
   };
   const handleWeekday = (weekday) => {
+    // console.log("Input weekday:", weekday); 
     switch(weekday) {
-        case 1: return '日';  // Sunday
-        case 2: return '一';  // Monday
-        case 3: return '二';  // Tuesday
-        case 4: return '三';  // Wednesday
-        case 5: return '四';  // Thursday
-        case 6: return '五';  // Friday
-        case 7: return '六';  // Saturday
-        default: return 'Invalid weekday';  // In case an invalid number is provided
+        case '0': return '日';  // Sunday
+        case '1': return '一';  // Monday
+        case '2': return '二';  // Tuesday
+        case '3': return '三';  // Wednesday
+        case '4': return '四';  // Thursday
+        case '5': return '五';  // Friday
+        case '6': return '六';  // Saturday
+        default: return weekday;  // In case an invalid number is provided
     }
 }
 

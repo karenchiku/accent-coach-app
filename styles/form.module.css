@@ -102,6 +102,7 @@
   justify-content: center;
   align-items: center;
 
+  
 }
 
 
@@ -113,13 +114,24 @@
 .inputcontanier .inputbox{
   text-align: center;
   width: 100%;
+  position: relative;
+  padding-bottom: 10px;
 }
 
 .inputcontanier .invalid{
   color: red;
-  font-size: 14px;
+  font-size: 12px;
   margin: 0;
   padding: 0;
+  /* background-color: blue; */
+  position: absolute;
+  bottom: 0 ;
+  left: 0;
+  right: 0;
+
+
+  /* position: absolute; */
+  /* bottom: 0; */
 }
 /* 
 .confirmbox{

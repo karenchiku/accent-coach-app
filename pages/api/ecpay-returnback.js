@@ -1,10 +1,15 @@
 
-const sql = require('mssql');
+
 import nodemailer from 'nodemailer';
 const crypto = require('crypto');
 import { computeCheckMacValue } from '../../components/utils/checkmachinevalue';
-import config from '../../config/config';
-const pool = new sql.ConnectionPool(config);
+
+const { Pool } = require('pg');
+require('dotenv').config();
+
+const pool = new Pool({
+  connectionString: process.env.POSTGRES_URL + "?ssl=true&sslmode=require",
+});
 
 const MERCHANT_ID = process.env.MERCHANT_ID;
 const HASH_KEY = process.env.HASH_KEY;
@@ -52,58 +57,68 @@ export default async function ecpaycallback(req, res) {
 }
 //updata the rtncode to the database
 async function handleRtncode(RtnCode, MerchantTradeNo, PaymentDate) {
+  const client = await pool.connect();
+  
   try {
-    await pool.connect();
-    const request = new sql.Request(pool);
-    request.input('OrderID', sql.VarChar, MerchantTradeNo);
-    request.input('RtnCode', sql.VarChar, RtnCode);
-    request.input('PaymentDate', sql.DateTime, PaymentDate);
-    const result = await request.query(`
-        exec dbo.sp_UpdateAccentCoachBooking @OrderID, @PaymentDate, @RtnCode
-    `);
+    const query = `
+      CALL sp_UpdateAccentCoachBooking($1, $2, $3);
+    `;
+
+    const values = [
+      MerchantTradeNo,
+      PaymentDate,
+      RtnCode
+    ];
+    
+    await client.query(query, values);
   } catch (err) {
     console.log(err);
   } finally {
-    await pool.close();
+    client.release();
   }
 }
-
 //insert the result to database 
 async function handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue, calculateCheckMacValue) {
+  const client = await pool.connect();
+  
   try {
-    await pool.connect();
-    const request = new sql.Request(pool);
-    request.input('MerchantID', sql.VarChar, MerchantID);
-    request.input('MerchantTradeNo', sql.VarChar, MerchantTradeNo);
-    request.input('RtnCode', sql.VarChar, RtnCode);
-    request.input('RtnMsg', sql.NVarChar, RtnMsg);
-    request.input('PaymentDate', sql.DateTime, PaymentDate);
-    request.input('PaymentType', sql.VarChar, PaymentType);
-    request.input('PaymentTypeChargeFee', sql.VarChar, PaymentTypeChargeFee);
-    request.input('TradeNo', sql.VarChar, TradeNo);
-    request.input('TradeDate', sql.DateTime, TradeDate);
-    request.input('TradeAmt', sql.Int, TradeAmt);
-    request.input('CheckMacValue', sql.VarChar, CheckMacValue);
-    request.input('CalculateCheckMacValue', sql.VarChar, calculateCheckMacValue);
-    const result = await request.query(`
-        INSERT INTO [accentcoach_epaycallback] (MerchantID, MerchantTradeNo, RtnCode, RtnMsg, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt , CheckMacValue,CalculateCheckMacValue)
-        VALUES (@MerchantID, @MerchantTradeNo, @RtnCode, @RtnMsg, @PaymentDate, @PaymentType,@PaymentTypeChargeFee, @TradeNo, @TradeDate, @TradeAmt, @CheckMacValue, @CalculateCheckMacValue)
-        `);
+    const query = `
+      INSERT INTO accentcoach_epaycallback 
+      (MerchantID, MerchantTradeNo, RtnCode, RtnMsg, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt , CheckMacValue, CalculateCheckMacValue)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+    `;
+
+    const values = [
+      MerchantID, 
+      MerchantTradeNo, 
+      RtnCode, 
+      RtnMsg, 
+      PaymentDate, 
+      PaymentType, 
+      PaymentTypeChargeFee, 
+      TradeNo, 
+      TradeDate, 
+      TradeAmt, 
+      CheckMacValue, 
+      calculateCheckMacValue
+    ];
+    
+    await client.query(query, values);
   } catch (err) {
     console.error(err);
   } finally {
-    await pool.close();
+    client.release();
   }
 }
 
 async function handleBookSendEmail(orderid) {
  
   try {
-    await pool.connect();
+      const client = await pool.connect();
 
-    const query = `SELECT * FROM dbo.accentcoach_bookings WHERE orderid ='${orderid}'`;
-    const result = await pool.request().query(query);
-    const booking =result.recordset[0]
+      const query = `SELECT * FROM accentcoach_bookings WHERE orderid = $1`;
+      const result = await client.query(query, [orderid]);
+      const booking =result.rows[0]
 
      // Create a transporter object using the default SMTP transport
      const transporter = nodemailer.createTransport({

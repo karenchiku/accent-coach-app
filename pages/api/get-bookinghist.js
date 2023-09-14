@@ -1,27 +1,27 @@
-const sql = require('mssql');
-import config from '../../config/config';
+const { Pool } = require('pg');
+require('dotenv').config();
 
-const pool = new sql.ConnectionPool(config);
+const pool = new Pool({
+  connectionString: process.env.POSTGRES_URL + "?ssl=true&sslmode=require",
+});
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).end(); // Method Not Allowed
   }
 
-    try {
-      await pool.connect();
+  const client = await pool.connect();
 
-      const {email,phone} = req.body;
-      const query = `SELECT * FROM accentcoach_bookings where email = '${email}' and phone = '${phone}'`;
-      const result = await pool.request().query(query);
- 
-      res.status(200).json(result.recordset);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({message: 'Error query booking'});
-    } finally {
-      await pool.close();
-    }
-
-
+  try {
+    const { email, phone } = req.body;
+    const query = `SELECT * FROM accentcoach_bookings WHERE email = $1 AND phone = $2`;
+    const result = await client.query(query, [email, phone]);
+    
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error query booking' });
+  } finally {
+    client.release();
+  }
 }

@@ -29,7 +29,7 @@ export default function Payment() {
         .then(data => {
           if (data[0]) {
             setBooking(data[0]);
-            // console.log(booking)
+            console.log(booking)
             setIsLoading(false);
           }
 

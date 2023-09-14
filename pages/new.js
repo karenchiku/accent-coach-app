@@ -81,11 +81,8 @@ export default function paymentsucess() {
         if (datarecording.length != 0) {
             setIshasRecording(true);
         } else {
-            console.log(audioURL);
-
             // create a new recording
 
-            // console.log('create recording');
             // await fetch('/api/create-recording', {
             //     method: 'POST',
             //     body: JSON.stringify({ username, email }),
@@ -108,28 +105,39 @@ export default function paymentsucess() {
             formData.append('audio', audioBlobFile)
             formData.append('username', username)
             formData.append('email', email)
-            console.log(username)
+
             try {
+                
+                
                 const response = await fetch('/api/send-audioemail', {
                     method: 'POST',
                     body: formData,
 
                 });
                 const data = await response.json();
-                console.log(data);
                 if (data.message == 'success') {
+                    setIsSubmitting(false);
                     setSentRecording(true);
+     
+                    const responsecreatedata= await fetch('/api/create-recording', {
+                        method: 'POST',
+                        body: JSON.stringify({ username, email }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+
                 }
+                
+
             } catch (error) {
                 console.error('Error uploading audio:', error);
+                
             }
-
         }
         setIsSubmitting(false);
-
-
     }
-  
+
     return (
         <Layout>
             <Head>
@@ -142,10 +150,10 @@ export default function paymentsucess() {
                     <div className={formStyles.formtitle}>
                         <p className={utilStyles.textLg} >錄下你/妳的發音</p>
                     </div>
-                    <br/>
+                    <br />
                     <div className={utilStyles.textSm}>
                         <p>請念出以下句子, 並按下錄音寄出給我們</p>
-                    
+
                         <p>1. Is the laundry dry yet? I’ve been waiting for hours!</p>
                         <p>2. My brother says he doesn’t have any siblings. Mom, what do you think about that?</p>
                         <p>3. There’s a construction cone blocking the road ahead. Let’s turn left instead.</p>
@@ -160,7 +168,7 @@ export default function paymentsucess() {
                     {audioURL && (
                         <div className={formStyles.audioresult}>
                             <audio controls src={audioURL} type="audio/mp3" />
-                            
+
                             <div className={formStyles.inputcontent}>
                                 <div className={formStyles.inputcontanier}>
                                     {/* <div className={formStyles.inputlabel}>Name</div> */}
@@ -184,9 +192,9 @@ export default function paymentsucess() {
                                     {isSentRecording && <p>已傳送錄音給老師</p>}
                                 </div>
                             </div>
-                            <br/>
+                            <br />
                             <div className={utilStyles.textSm}>
-          
+
                                 <p>*相同Email僅限一次課前評估, 請您送出前確認錄音內容是否完整 </p>
                                 <p>*若己經預約同學請填寫與預約時相同的Email</p>
 
