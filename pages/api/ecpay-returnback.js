@@ -153,7 +153,7 @@ async function handleBookSendEmail(orderid) {
   } catch (error) {
     console.error(error);
   } finally {
-    await pool.close();
+    client.release();
   }
 }
 
