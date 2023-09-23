@@ -112,10 +112,11 @@ async function handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, Paymen
 }
 
 async function handleBookSendEmail(orderid) {
- 
-  try {
-      const client = await pool.connect();
+  
+  const client = await pool.connect();
 
+  try {
+      
       const query = `SELECT * FROM accentcoach_bookings WHERE orderid = $1`;
       const result = await client.query(query, [orderid]);
       const booking =result.rows[0]
