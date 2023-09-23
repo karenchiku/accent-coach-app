@@ -38,7 +38,7 @@ export default async function ecpaycallback(req, res) {
       await handleRtncode(RtnCode, MerchantTradeNo, PaymentDate)
       console.log('Update booking ', MerchantTradeNo)
       
-      if (RtnCode == 1 & RtnMsg == "Succeeded") {
+      if (RtnCode == 1) {
       await handleBookSendEmail(MerchantTradeNo)
       console.log('Send email ', MerchantTradeNo)
       }
