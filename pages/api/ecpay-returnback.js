@@ -112,7 +112,7 @@ async function handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, Paymen
 }
 
 async function handleBookSendEmail(orderid) {
-  
+
   const client = await pool.connect();
 
   try {
@@ -132,16 +132,16 @@ async function handleBookSendEmail(orderid) {
 
     const mailOptions = {
       from: g_admin,
-      to: `${booking.email};${g_admin}`,
-      subject: 'test message',
+      to: `${booking.email}`,
+      subject: 'Accent Coach 訂單明細',
       text: `Hi ${booking.username},
         \nThank you for attending the accent coach class.
         \nHere is your booking information, after the teacher confirmed we will send you a confirmation email with location address.
-        \n\n1.你的訂單編號:${orderid}
-        \n2.預約日期:${booking.bookingdate}
-        \n3.預約項目:${booking.itemname}
         \n
-        \n If you have any further questions pleas let us know.
+        1.你的訂單編號:${orderid}
+        2.預約日期:${booking.bookingdate}
+        3.預約項目:${booking.itemname}
+        \n
         \n Best,
         \n Accent Coach Team
         `,

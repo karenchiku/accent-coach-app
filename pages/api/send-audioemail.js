@@ -38,8 +38,15 @@ export default async function handler(req, res) {
     const mailOptions = {
       from: g_admin,
       to: `${email};${g_admin}`,
-      subject: 'Accent Coach Sample Recording',
-      text: `Hi ${username},\nthank you to attend your recording test, here is your recording! \nOur Accnet Coach will give you a feedback through the the email\nThank you for your paitant!\n\n** Regarding the recording methods the audio might not play properly on iPhone, but it works well on the PC.`,
+      subject: 'Accent Coach 錄音',
+      text: `Hi ${username},
+        \nthank you to attend your recording test, here is your recording! 
+        \nOur Accnet Coach will give you a feedback through the the email. Thank you for your paitant!
+        \n\n** Regarding the recording methods the audio might not play properly on iPhone, but it works well on the PC.
+        \n
+        \n Best,
+        \n Accent Coach Team
+      `,
       attachments: [
         {
           filename: `recoding-${username}.mp3`,
