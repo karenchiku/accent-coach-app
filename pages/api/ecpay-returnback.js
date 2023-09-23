@@ -135,15 +135,13 @@ async function handleBookSendEmail(orderid) {
       to: `${booking.email}`,
       subject: 'Accent Coach 訂單明細',
       text: `Hi ${booking.username},
-        \nThank you for attending the accent coach class.
-        \nHere is your booking information, after the teacher confirmed we will send you a confirmation email with location address.
-        \n
+        Thank you for attending the accent coach class.
+        Here is your booking information, after the teacher confirmed we will send you a confirmation email with location address.
         1.你的訂單編號:${orderid}
         2.預約日期:${booking.bookingdate}
         3.預約項目:${booking.itemname}
-        \n
-        \n Best,
-        \n Accent Coach Team
+        Best,
+        Accent Coach Team
         `,
     
     };

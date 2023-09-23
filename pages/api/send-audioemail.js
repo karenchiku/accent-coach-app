@@ -40,12 +40,12 @@ export default async function handler(req, res) {
       to: `${email};${g_admin}`,
       subject: 'Accent Coach 錄音',
       text: `Hi ${username},
-        \nthank you to attend your recording test, here is your recording! 
-        \nOur Accnet Coach will give you a feedback through the the email. Thank you for your paitant!
-        \n\n** Regarding the recording methods the audio might not play properly on iPhone, but it works well on the PC.
-        \n
-        \n Best,
-        \n Accent Coach Team
+        Thank you to attend your recording test, here is your recording! 
+        Our Accnet Coach will give you a feedback through the the email. Thank you for your paitant!
+        
+        ** Regarding the recording methods the audio might not play properly on iPhone, but it works well on the PC.
+        Best,
+        Accent Coach Team
       `,
       attachments: [
         {
